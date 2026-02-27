@@ -1,26 +1,28 @@
-﻿using System.Threading;
-using CoffeeShop.Application;
+﻿using CoffeeShop.Application;
 using CoffeeShop.Domain;
+using System.Collections.Concurrent;
+using System.Threading;
 
 namespace CoffeeShop.Infrastructure;
 
 public class CoffeeMachineState : ICoffeeMachineState
 {
-    private int _counter = 0;
+    private readonly ConcurrentDictionary<int, CoffeeMachine> _machines = new();
 
-    public CoffeeMachine Machine { get; }
-
-    public CoffeeMachineState()
+    public CoffeeMachine GetOrCreate(int machineId)
     {
-        Machine = new CoffeeMachine();
+        return _machines.GetOrAdd(machineId, id => new CoffeeMachine(machineId));
     }
 
-    public int Current => _counter;
-
-    public int Increment()
+    public int Increment(int machineId)
     {
-        var newValue = Interlocked.Increment(ref _counter);
-        Machine.Brew();
-        return newValue;
+        var machine = GetOrCreate(machineId);
+        return machine.Brew();
+    }
+
+    public int Current(int machineId)
+    {
+        var machine = GetOrCreate(machineId);
+        return machine.TotalCoffeesBrewed;
     }
 }

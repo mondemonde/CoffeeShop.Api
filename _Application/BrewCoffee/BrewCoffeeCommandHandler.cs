@@ -22,26 +22,33 @@ public sealed class BrewCoffeeCommandHandler
     {
         var now = _clock.Now;
 
-        // April 1st: return 418
+        var thisMachine = _state.GetOrCreate(request.MachineId);
+        var totalForMachineToBrew = thisMachine.JustIncreaseAge();
+
+        // April 1st: return 418 for any machine
         if (now.Month == 4 && now.Day == 1)
         {
             return Task.FromResult(Results.StatusCode(StatusCodes.Status418ImATeapot));
         }
 
-        var count = _state.Increment();
+       
 
-        // Every 5th call: 503 (rule stays in Application layer)
-        if (count % 5 == 0)
+        // Every 5th coffee **per machine** -> 503
+        if (thisMachine.Age % 5 == 0)
         {
+            Console.WriteLine($"Machine {request.MachineId} will have total to brew {totalForMachineToBrew} coffees, returning 503");
             return Task.FromResult(Results.StatusCode(StatusCodes.Status503ServiceUnavailable));
+
         }
 
-        var prepared = now.ToString("o"); // ISO-8601
+        var totalForMachine = _state.Increment(request.MachineId);
+        var prepared = now.ToString("o");
 
         var response = new BrewCoffeeResponse
         {
             Message = "Your piping hot coffee is ready",
             Prepared = prepared
+          
         };
 
         return Task.FromResult(Results.Ok(response));

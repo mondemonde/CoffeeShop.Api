@@ -1,10 +1,11 @@
-﻿using CoffeeShop.Domain;
+﻿
+using CoffeeShop.Domain;
 
 namespace CoffeeShop.Application;
 
 public interface ICoffeeMachineState
 {
-    CoffeeMachine Machine { get; }
-    int Increment();
-    int Current { get; }
+    CoffeeMachine GetOrCreate(int machineId = 1);
+    int Increment(int machineId = 1);
+    //int Current(int machineId = 1);
 }

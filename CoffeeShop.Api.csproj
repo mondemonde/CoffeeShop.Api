@@ -13,6 +13,11 @@
 
   <ItemGroup>
     <Folder Include="_Application\_Rules\" />
+    <Folder Include="__docs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeShop.Domain\CoffeeShop.Domain.csproj" />
   </ItemGroup>
 
 </Project>
