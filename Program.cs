@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Application & Infrastructure
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Configuration); // Pass builder.Configuration
 builder.Services.AddInfrastructure();
 
 // MediatR
