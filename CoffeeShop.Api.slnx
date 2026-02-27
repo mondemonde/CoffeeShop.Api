@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Test/">
+    <Project Path="../CoffeeShop.Api.IntegrationTests/CoffeeShop.Api.IntegrationTests.csproj" Id="cdae58cc-e7a5-4319-a705-1068b9f66542" />
+    <Project Path="../CoffeeShop.Application.Tests/CoffeeShop.Application.Tests.csproj" Id="721bb4cd-2c3c-4d83-a695-6834d255b075" />
+  </Folder>
+  <Project Path="../CoffeeShop.Application/CoffeeShop.Application.csproj" />
   <Project Path="../CoffeeShop.Domain/CoffeeShop.Domain.csproj" Id="ecffbc13-bb7b-4caf-bdbf-e16a43a0ca9c" />
   <Project Path="CoffeeShop.Api.csproj" />
 </Solution>

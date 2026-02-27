@@ -17,7 +17,10 @@ builder.Services.AddInfrastructure();
 
 // MediatR
 builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+{
+    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+    cfg.RegisterServicesFromAssembly(typeof(CoffeeShop.Application.DependencyInjection).Assembly);
+});
 
 var app = builder.Build();
 

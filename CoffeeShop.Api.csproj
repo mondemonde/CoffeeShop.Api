@@ -7,16 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="_Application\**" />
+    <Content Remove="_Application\**" />
+    <EmbeddedResource Remove="_Application\**" />
+    <None Remove="_Application\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="_Application\_Rules\" />
     <Folder Include="__docs\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoffeeShop.Application\CoffeeShop.Application.csproj" />
     <ProjectReference Include="..\CoffeeShop.Domain\CoffeeShop.Domain.csproj" />
   </ItemGroup>
 
