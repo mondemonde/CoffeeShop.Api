@@ -17,9 +17,9 @@ namespace CoffeeShop.Api.Controllers
         }
 
         [HttpGet("brew-coffee")]
-        public async Task<ActionResult<BrewCoffeeResponse>> BrewCoffee()
+        public async Task<ActionResult<BrewCoffeeResponse>> BrewCoffee([FromQuery] string? location = "New York")
         {
-            var response = await _mediator.Send(new BrewCoffeeCommand());
+            var response = await _mediator.Send(new BrewCoffeeCommand(Location: location));
 
             switch (response.StatusCode)
             {
