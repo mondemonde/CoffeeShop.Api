@@ -2,6 +2,8 @@ using System.Reflection;
 using CoffeeShop.Application;
 using CoffeeShop.Infrastructure;
 using MediatR;
+using Mapster;
+using MapsterMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMapster();
 
 // Application & Infrastructure
 builder.Services.AddApplication(builder.Configuration); // Pass builder.Configuration
